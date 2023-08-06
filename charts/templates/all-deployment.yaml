@@ -31,14 +31,15 @@ spec:
         - name: "{{ $storageName }}-pv-{{ $env }}"
           persistentVolumeClaim:
             claimName: "{{ $storageName }}-pvc-{{ $env }}"
-      nodeAffinity:
-            requiredDuringSchedulingIgnoredDuringExecution:
-              nodeSelectorTerms:
-              - matchExpressions:
-                - key: agentpool
-                  operator: In
-                  values:
-                  - "{{ $nodeAffintyLabel }}"
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: agentpool
+                operator: In
+                values:
+                - "{{ $nodeAffintyLabel }}"
       containers:
         - args:
             - ./run.sh
