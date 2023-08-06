@@ -1,0 +1,111 @@
+appName: sr-executor
+autoscaling:
+  enabled: false
+  maxReplicas: 100
+  minReplicas: 1
+  targetCPUUtilizationPercentage: 80
+nodeAffinityLabel: default
+config:
+  algo_url:
+    algo_rest: http://10.0.10.15:9000/
+    texture: http://10.0.10.15:9000/
+  datasource_id: '37'
+  log_level: DEBUG
+  network:
+    const: /data/SR
+    map_const: /data/SR
+  ps_url: http://10.0.10.4/services/
+  psdbs_url: http://172.30.172.154:8090/
+  rabbit:
+    host: 192.168.115.5
+    password: bla
+    port: '5672'
+    rpc_exchange: LMY
+    username: bla
+  radius: '50'
+  retry:
+    count: '3'
+    timeout: '1000'
+  sr_texture_raltive_path: /sr_texture_dev
+  tiles3d:
+    const_template_glb_name: tile_model
+    coordinates_geometric_error: '45'
+    coordinates_root_geometry_error: '40'
+    coordinates_width: '0.0025'
+    datasource_geometric_error: '200000'
+    datasource_map: /data/SR/layers3d/3DTilesSharedBatchMap.json
+    estates_url: ../B3DM/
+    layer_service_url: http://20.123.104.78:4020
+    region_area_size: '500'
+    template_ds_lods: LOD2,LOD3,best
+    template_ds_types: semantic,real
+    tileset_directory: /data/SR/layers3d
+    tilesets_url: http://bereshit-qa/tiles3dserver/3DTiles
+    layer_source: bereshit
+    b3dm_location: B3DM
+    relative_url: ../B3DM
+    compress: false
+  tz: Asia/Jerusalem
+deployment_rest:
+  - container:
+      argument: threeDTiles
+      replicaCount: 1
+    name: sr-tiles3d
+  - container:
+      argument: createB3DM
+      replicaCount: 3
+    name: sr-create-b3dm
+  - container:
+      argument: deleteB3DM
+      replicaCount: 3
+    name: sr-delete-b3dm  
+  - container:
+      argument: updateTileset
+      replicaCount: 1
+    name: sr-update-tileset
+  - container:
+      argument: createGLTFS
+      replicaCount: 3
+    name: sr-create-gltfs
+  - container:
+      argument: updateDB
+      replicaCount: 3
+    name: sr-update-db
+  - container:
+      argument: roofImDet2CJ
+      replicaCount: 3
+    name: sr-roof-im-det-2cj
+  - container:
+      argument: imageIJ2Loss
+      replicaCount: 3
+    name: sr-image-ij-2loss
+  - container:
+      argument: losIntersectsDB
+      replicaCount: 3
+    name: sr-los-intersects-db
+  - container:
+      argument: getUuidsByExtent
+      replicaCount: 3
+    name: sr-get-uuids-by-extent
+  - container:
+      argument: smartImageRetrieval
+      replicaCount: 3
+    name: smart-image-retrieval
+env: azure
+imageName: lmy/sr-executor
+logo: javascript
+namespace: sr-executor-azure
+pullPolicy: IfNotPresent
+registry: srregis.azurecr.io
+registryPullSecret: acr-secret
+storage:
+  accessModes: ReadWriteMany
+  name: sr-executor-data
+  secretName: secret-sasrnfsdev-1
+  azurestorageaccountkey: bW9jaw==
+  azurestorageaccountname: bW9jaw==
+  shareName: data
+  storageCapacity: 100Gi
+  storageClassName: azure-file-storageclass
+  storageRequest: 50Gi
+versionTag: 2.2.11_hetro
