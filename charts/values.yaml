@@ -108,4 +108,4 @@ storage:
   storageCapacity: 100Gi
   storageClassName: azure-file-storageclass
   storageRequest: 50Gi
-versionTag: 2.2.11_hetro
+versionTag: 2.2.10_hetro
