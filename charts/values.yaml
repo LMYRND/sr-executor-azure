@@ -96,7 +96,7 @@ imageName: lmy/sr-executor
 logo: javascript
 namespace: sr-executor-azure
 pullPolicy: IfNotPresent
-registry: srregis.azurecr.io
+registry: devsracr.azurecr.io
 registryPullSecret: acr-secret
 storage:
   accessModes: ReadWriteMany
