@@ -29,6 +29,7 @@ spec:
   accessModes:
   - ReadWriteMany
   storageClassName: {{ .storageClassName }}
+  
   resources:
      requests:
        storage: {{ .storageRequest }}
