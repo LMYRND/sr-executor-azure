@@ -13,7 +13,6 @@ spec:
   accessModes:
     - {{ .accessModes }}
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: {{ .storageClassName }}
   volumeMode: Filesystem
   azureFile:
     secretNamespace: {{ $namespace }}
