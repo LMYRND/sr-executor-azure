@@ -31,12 +31,7 @@ spec:
         - name: "{{ $storageName }}-pv-{{ $env }}"
           persistentVolumeClaim:
             claimName: "{{ $storageName }}-pvc-{{ $env }}"
-      containers:
-        - args:
-            - ./run.sh
-            - {{ .container.argument }}
-            - {{ .container.argument }}
-          nodeAffinity:
+      nodeAffinity:
             requiredDuringSchedulingIgnoredDuringExecution:
               nodeSelectorTerms:
               - matchExpressions:
@@ -44,6 +39,11 @@ spec:
                   operator: In
                   values:
                   - "{{ $nodeAffintyLabel }}"
+      containers:
+        - args:
+            - ./run.sh
+            - {{ .container.argument }}
+            - {{ .container.argument }}
           command:
             - /bin/bash
           name: "{{ .name }}-{{ $env }}"
