@@ -106,6 +106,6 @@ storage:
   azurestorageaccountname: bW9jaw==
   shareName: data
   storageCapacity: 100Gi
-  storageClassName: azure-file-storageclass
+  storageClassName: azure-file-sc
   storageRequest: 50Gi
 versionTag: 2.2.10_hetro

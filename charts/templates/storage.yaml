@@ -9,16 +9,15 @@ metadata:
 spec:
   capacity:
     storage: {{ .storageCapacity }}
-
   accessModes:
     - {{ .accessModes }}
-  persistentVolumeReclaimPolicy: Retain
+  storageClassName: {{ .storageClassName }}
   volumeMode: Filesystem
   azureFile:
-    secretNamespace: {{ $namespace }}
     secretName: "{{ .secretName }}-{{ $env }}"
     shareName:  {{ .shareName }}
     readOnly: false
+
 
 ---
 apiVersion: v1
