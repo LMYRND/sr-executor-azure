@@ -53,11 +53,11 @@ deployment_rest:
     name: sr-tiles3d
   - container:
       argument: createB3DM
-      replicaCount: 3
+      replicaCount: 5
     name: sr-create-b3dm
   - container:
       argument: deleteB3DM
-      replicaCount: 3
+      replicaCount: 5
     name: sr-delete-b3dm  
   - container:
       argument: updateTileset
@@ -65,11 +65,11 @@ deployment_rest:
     name: sr-update-tileset
   - container:
       argument: createGLTFS
-      replicaCount: 3
+      replicaCount: 5
     name: sr-create-gltfs
   - container:
       argument: updateDB
-      replicaCount: 3
+      replicaCount: 5
     name: sr-update-db
   - container:
       argument: roofImDet2CJ
